@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    @apply font-sans text-white;
+    /* Deep, slightly-blue space gradient — not the generic black-to-purple. */
+    background:
+      radial-gradient(
+        ellipse 1200px 800px at 70% 20%,
+        rgba(245, 197, 24, 0.05) 0%,
+        transparent 55%
+      ),
+      radial-gradient(ellipse at center, #0a0d1f 0%, #02020a 70%);
+  }
+
+  ::selection {
+    background: rgba(245, 197, 24, 0.4);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* Thin horizontal rule, used as section markers and under titles. */
+  .rule-gold {
+    height: 2px;
+    background: #f5c518;
+    transform-origin: left;
+  }
+}
