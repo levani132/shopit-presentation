@@ -64,4 +64,34 @@ export const slidesConfig: readonly SlideConfig[] = [
     // than running along a horizontal axis.
     linePoint: [53.5, -6.5, 0],
   },
+  {
+    id: "foreignBenchmarks",
+    label: "გლობალური ეტალონები · Shopify · Wix · Woo",
+    position: [64, 2.5, 0],
+    // Top-right — diagonal sweep coming up from slide 4's bottom-right.
+    linePoint: [69.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "localCompetitors",
+    label: "ლოკალური კონკურენტული ლანდშაფტი",
+    position: [80, -3.5, 0],
+    // Bottom-right — continues the diagonal alternation from slide 4's
+    // TR linePoint, so the line sweeps top-right → bottom-right across
+    // this slide's viewport.
+    linePoint: [85.5, -6.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "sellerFindings",
+    label: "კვლევის შედეგები · გამყიდველები",
+    position: [96, 2.5, 0],
+    // Top-right — alternates back from localCompetitors' BR corner so the
+    // chord between them sweeps diagonally across both viewports.
+    // (Narratively this is deck slide 7; deck slide 6 — Research
+    // Methodology — is still PENDING and will be inserted ahead of this
+    // entry when built.)
+    linePoint: [101.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
 ];

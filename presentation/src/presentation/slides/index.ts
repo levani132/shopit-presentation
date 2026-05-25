@@ -3,6 +3,9 @@ import { TitleSlide } from "./TitleSlide";
 import { ProblemSlide } from "./ProblemSlide";
 import { DemoSlide } from "./DemoSlide";
 import { MarketOpportunitySlide } from "./MarketOpportunitySlide";
+import { ForeignBenchmarksSlide } from "./ForeignBenchmarksSlide";
+import { LocalCompetitorsSlide } from "./LocalCompetitorsSlide";
+import { SellerFindingsSlide } from "./SellerFindingsSlide";
 
 /**
  * Registry mapping slide id (from slides.config.ts) to its content component.
@@ -22,6 +25,9 @@ export const slideRegistry: Readonly<Record<string, ComponentType>> = {
   problem: ProblemSlide,
   demo: DemoSlide,
   marketOpportunity: MarketOpportunitySlide,
+  foreignBenchmarks: ForeignBenchmarksSlide,
+  localCompetitors: LocalCompetitorsSlide,
+  sellerFindings: SellerFindingsSlide,
 };
 
 export function getSlideComponent(id: string): ComponentType | undefined {
