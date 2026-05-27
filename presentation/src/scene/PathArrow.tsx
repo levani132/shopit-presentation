@@ -65,8 +65,13 @@ export function PathArrow({
     const progress = progressRef.current.value;
     const t = clamp(progress / (totalSlides - 1), 0, 1);
 
-    curve.getPointAt(t, SCRATCH_POSITION);
-    curve.getTangentAt(t, SCRATCH_TANGENT).normalize();
+    // Use getPoint / getTangent (uniform parameterization) rather than
+    // getPointAt / getTangentAt (arc-length parameterization) so that at
+    // t = i/(n-1) we sit exactly on the i-th linePoint. This matches
+    // CameraRig and keeps the arrow visually planted on each slide's
+    // anchor corner when the camera comes to rest.
+    curve.getPoint(t, SCRATCH_POSITION);
+    curve.getTangent(t, SCRATCH_TANGENT).normalize();
 
     // Keep the arrow flush with the slide plane — drop any z component of
     // the tangent so the flat geometry stays parallel to the plane.

@@ -195,7 +195,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 6 — Research methodology · `ResearchMethodologySlide` · **IN PROGRESS · research-methodology**
+### Slide 6 — Research methodology · `ResearchMethodologySlide` · **DONE**
 
 **Goal**: establish the empirical grounding of the thesis. This is the slide a thesis committee will examine closely.
 
@@ -239,7 +239,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 8 — Solution overview · `SolutionSlide` · **PENDING**
+### Slide 8 — Solution overview · `SolutionSlide` · **DONE**
 
 **Goal**: introduce the *product* of ShopIt — what it concretely is.
 
@@ -257,7 +257,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 9 — Payments roadmap · `PaymentsRoadmapSlide` · **PENDING**
+### Slide 9 — Payments roadmap · `PaymentsRoadmapSlide` · **DONE**
 
 **Goal**: explain the payments stack — MVP with Keepz, then banks.
 
@@ -275,7 +275,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 10 — Logistics · `LogisticsSlide` · **PENDING**
+### Slide 10 — Logistics · `LogisticsSlide` · **DONE**
 
 **Goal**: present the courier marketplace based on courier-side research and three delivery models combined.
 
@@ -295,7 +295,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 11 — Pricing & ARPU · `PricingSlide` · **PENDING**
+### Slide 11 — Pricing & ARPU · `PricingSlide` · **DONE**
 
 **Goal**: tiered pricing + Average Revenue Per User assumption.
 
@@ -314,7 +314,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 12 — Pilot & phased growth · `GrowthSlide` · **PENDING**
+### Slide 12 — Pilot & phased growth · `GrowthSlide` · **DONE**
 
 **Goal**: realistic ramp from pilot to 200 sellers.
 
@@ -332,7 +332,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 13 — Unit economics · `UnitEconomicsSlide` · **PENDING**
+### Slide 13 — Unit economics · `UnitEconomicsSlide` · **DONE**
 
 **Goal**: defend the business model. CAC, LTV, payback, break-even.
 
@@ -353,7 +353,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 14 — Marketing · `MarketingSlide` · **PENDING**
+### Slide 14 — Marketing · `MarketingSlide` · **DONE**
 
 **Goal**: GTM channels — B2B (sellers) and B2B2C (sellers → end customers).
 
@@ -370,13 +370,13 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 15 — Team · `TeamSlide` · **PENDING**
+### Slide 15 — Team · `TeamSlide` · **DONE**
 
 **Goal**: who's building this. Tiny by design.
 
 **Content brief**:
 - Eyebrow: `გუნდი · 15`
-- Heading: `ვინც ააშენებს`
+- Heading: `ვინ ქმნის შოპითს`
 - Team cards:
   - **Levan Beroshvili** (founder) — MBA, [background from thesis].
   - Co-founders / advisors if applicable — confirm with Levan.
@@ -388,7 +388,7 @@ Five-step camera zoom into mini company slides (Shopify → Wix → Woo), then c
 
 ---
 
-### Slide 16 — Conclusions, limitations & Q&A · `ConclusionsSlide` · **PENDING**
+### Slide 16 — Conclusions, limitations & Q&A · `ConclusionsSlide` · **DONE**
 
 **Goal**: close the talk. Restate thesis, summarise contribution, acknowledge limitations, open Q&A.
 

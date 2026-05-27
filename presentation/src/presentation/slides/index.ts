@@ -5,7 +5,17 @@ import { DemoSlide } from "./DemoSlide";
 import { MarketOpportunitySlide } from "./MarketOpportunitySlide";
 import { ForeignBenchmarksSlide } from "./ForeignBenchmarksSlide";
 import { LocalCompetitorsSlide } from "./LocalCompetitorsSlide";
+import { ResearchMethodologySlide } from "./ResearchMethodologySlide";
 import { SellerFindingsSlide } from "./SellerFindingsSlide";
+import { SolutionSlide } from "./SolutionSlide";
+import { PaymentsRoadmapSlide } from "./PaymentsRoadmapSlide";
+import { LogisticsSlide } from "./LogisticsSlide";
+import { PricingSlide } from "./PricingSlide";
+import { GrowthSlide } from "./GrowthSlide";
+import { UnitEconomicsSlide } from "./UnitEconomicsSlide";
+import { MarketingSlide } from "./MarketingSlide";
+import { TeamSlide } from "./TeamSlide";
+import { ConclusionsSlide } from "./ConclusionsSlide";
 
 /**
  * Registry mapping slide id (from slides.config.ts) to its content component.
@@ -27,7 +37,17 @@ export const slideRegistry: Readonly<Record<string, ComponentType>> = {
   marketOpportunity: MarketOpportunitySlide,
   foreignBenchmarks: ForeignBenchmarksSlide,
   localCompetitors: LocalCompetitorsSlide,
+  researchMethodology: ResearchMethodologySlide,
   sellerFindings: SellerFindingsSlide,
+  solution: SolutionSlide,
+  paymentsRoadmap: PaymentsRoadmapSlide,
+  logistics: LogisticsSlide,
+  pricing: PricingSlide,
+  growth: GrowthSlide,
+  unitEconomics: UnitEconomicsSlide,
+  marketing: MarketingSlide,
+  team: TeamSlide,
+  conclusions: ConclusionsSlide,
 };
 
 export function getSlideComponent(id: string): ComponentType | undefined {

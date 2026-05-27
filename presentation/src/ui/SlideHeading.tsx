@@ -8,12 +8,13 @@ interface SlideHeadingProps {
   children: ReactNode;
 }
 
-// Slide-audience sizing — large enough to read from across a lecture hall.
-// Level 1 is reserved for hero titles (the opening card); level 2 carries
-// the rest of the deck.
+// Slide-audience sizing — large enough to read from across a lecture hall
+// but not so large the rest of the slide has no room to breathe. Level 1
+// is reserved for hero titles (the opening card); level 2 carries the
+// rest of the deck.
 const sizeClass: Record<NonNullable<SlideHeadingProps["level"]>, string> = {
-  1: "text-[96px] leading-[1.02] tracking-tight",
-  2: "text-[60px] leading-[1.1] tracking-tight",
+  1: "text-[88px] leading-[1.02] tracking-tight",
+  2: "text-[52px] leading-[1.1] tracking-tight",
 };
 
 const variantClass: Record<NonNullable<SlideHeadingProps["variant"]>, string> = {

@@ -4,17 +4,19 @@ interface SlideCardProps {
   /** Optional eyebrow label rendered above the card content (e.g., section). */
   eyebrow?: string;
   /** Tighter or roomier card. */
-  size?: "md" | "lg";
+  size?: "md" | "lg" | "xl";
   children: ReactNode;
 }
 
-// Sized for a lecture-hall projector / a remote-viewing committee, not for
-// a laptop preview. `lg` fills most of the screen so the audience can read
-// 28-30px body text comfortably from a distance; `md` is a notch smaller
-// for sparser slides.
+// Sized to feel like a slide on a lecture-hall projector — readable from
+// the back row, but with margin around it so the deep-space background
+// reads as a frame, not as a thin border. Roughly 3/4 of the viewport.
+// `xl` is reserved for slides where the content takes over the whole
+// frame (the demo video) and benefits from extra vertical room.
 const sizeClass: Record<NonNullable<SlideCardProps["size"]>, string> = {
-  md: "w-[min(1200px,86vw)] min-h-[74vh] px-16 py-14",
-  lg: "w-[min(1520px,92vw)] min-h-[82vh] px-20 py-16",
+  md: "w-[min(1100px,76vw)] min-h-[72vh] px-14 py-12",
+  lg: "w-[min(1400px,84vw)] min-h-[78vh] px-16 py-14",
+  xl: "w-[min(1500px,88vw)] min-h-[88vh] px-16 py-14",
 };
 
 /**

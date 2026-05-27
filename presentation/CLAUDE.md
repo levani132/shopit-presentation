@@ -1,6 +1,10 @@
 # Project context for future Claude sessions
 
-This file is the handoff document. Read it before doing anything in this repo. The user is **Levan Beroshvili** (Free University of Tbilisi, MBA22). The deliverable is an interactive presentation of his **ShopIt** MBA thesis (a digital commerce platform / business plan, written in Georgian). The source thesis PDF sits in the parent folder: `../ბეროშვილი_ლევან_MBA22_სამაგისტრო_ShopIt.pdf`.
+This file is the **architecture / conventions** handoff. Read it before doing anything in this repo. For the **slide-by-slide build roadmap** — what content goes on each slide, which slides are still TODO, how to claim one for parallel work — read the sister document `PLAN.md` in this directory.
+
+The user is **Levan Beroshvili** (Free University of Tbilisi, MBA22). The deliverable is an interactive presentation of his **ShopIt** MBA thesis (a digital commerce platform / business plan, written in Georgian). The source thesis PDF sits in the parent folder: `../ბეროშვილი_ლევან_MBA22_სამაგისტრო_ShopIt.pdf`.
+
+> **If you only have time to read one of these two files, read `PLAN.md` — it tells you what to build next.**
 
 ## Big-picture goal
 
@@ -92,23 +96,42 @@ The user pushed back hard against the original "AI-website starter pack" look (g
 - **Pills:** NOT used as rounded chips anymore. The `Pill` component still exists as a small mono label with a gold square marker; use sparingly.
 - **Nav strip:** slim editorial bar pinned bottom-center. Active dot is `h-[3px] w-10` gold with a yellow glow shadow; inactive dots are `h-[2px] w-3` dim white.
 
-## Slide content (sample, Georgian, ShopIt-themed)
+## Slide content — see `PLAN.md` for the full roadmap
 
-Three sample slides exist as placeholders. We will eventually port real content from the thesis PDF.
+`PLAN.md` lists all 17 slides, their status, and a content brief for each pending one. Built so far (5 of 17):
 
-1. **TitleSlide** (`id: "title"`) — FreeUniMark in corner, big serif "ShopIt", subtitle "ციფრული კომერციის პლატფორმა — ბიზნეს გეგმა", author/supervisor/year/city grid.
-2. **MarketSlide** (`id: "market"`) — competitive landscape: Instagram/Facebook shops, MyMarket/Extra/Veli, Shopify/Wix/WooCommerce.
-3. **ArchitectureSlide** (`id: "architecture"`) — three numbered components: მაღაზიის შემქმნელი / კურიერების მარკეტპლეისი / დამატებითი მოდულები. Staggered fade-in animation is the in-slide animation demo.
+| idx | id | status | summary |
+|---|---|---|---|
+| 0 | `title` | DONE | ShopIt wordmark, serif hero, author chrome |
+| 1 | `problem` | DONE | 3-step reveal: 7 pains → split infra/diff → tagline |
+| 2 | `demo` | DONE | full-bleed product video + outro |
+| 3 | `marketOpportunity` | DONE | TAM/SAM/SOM funnel, 600-seller focal |
+| 4 | `foreignBenchmarks` | DONE | 5-step camera-zoom into mini Shopify/Wix/Woo slides + matrix |
+| 5–16 | various | PENDING | see PLAN.md |
 
-Registry mapping `slide.id → ComponentType` is in `src/presentation/slides/index.ts`. Adding a slide = create component file → register → add config entry.
+The registry mapping `slide.id → ComponentType` is in `src/presentation/slides/index.ts`. Adding a slide = create component file → register → add config entry. PLAN.md §2 spells out the procedure.
 
-Current slide positions:
+Current slide positions in `slides.config.ts`:
 
-| id | position | linePoint | corner |
-|----|----------|-----------|--------|
-| title | (0, 0, 0) | (-5.5, 3, 0) | TL |
-| market | (16, -3.5, 0) | (21.5, -6.5, 0) | BR |
-| architecture | (32, 2.5, 0) | (37.5, 5.5, 0) | TR |
+| idx | id | position | linePoint | corner |
+|---|---|---|---|---|
+| 0 | title | (0, 0, 0) | (-5.5, 3, 0) | TL |
+| 1 | problem | (16, -3.5, 0) | (21.5, -6.5, 0) | BR |
+| 2 | demo | (32, 2.5, 0) | (37.5, 5.5, 0) | TR |
+| 3 | marketOpportunity | (48, -3.5, 0) | (53.5, -6.5, 0) | BR |
+| 4 | foreignBenchmarks | (64, 2.5, 0) | (69.5, 5.5, 0) | TR |
+
+When adding a new slide, continue the diagonal alternation: y flips `-3.5` (BR linePoint) and `+2.5` (TR linePoint); x advances by **+16** each slide.
+
+## Sub-step navigation (added since the original handoff)
+
+`SlideNavigationContext` was extended with a `(slideIndex, step)` model. Slides with reveal animations call `useSlideSteps(n)` from inside their body to declare a step count. `Next` increments the step until it's exhausted, then advances the slide; `Prev` symmetrically. Inactive slides see `step === 0`. See `src/navigation/SlideNavigationContext.tsx` and PLAN.md §3.2.
+
+**R3F context bridge**: drei `<Html>` creates a fresh React root that doesn't inherit context. `SlideNavigationContext` is re-provided in two places — inside the Canvas in `Presentation.tsx`, and inside the Html portal in `SlideStage.tsx`. Don't undo either bridge or `useSlideSteps` will throw.
+
+## Slide 4 zoom pattern (reference)
+
+`ForeignBenchmarksSlide.tsx` implements an "iOS-icon-to-app" zoom: the entire world (chrome + content + 3 tiles) is one element with `translate(dx%, dy%) scale(4)` applied, where `dx, dy` are computed so the focused tile's centre lands at the viewport centre after scaling. Mini tiles render the full company slide content at native size and shrink it with `transform: scale(0.25)`; world.scale × mini.shrink = 1, so when zoomed the content reads at native size. **No chrome can live outside the scaling element** — that's why this slide does NOT use `SlideCard`; it renders its own card chrome inside the scaling article. Re-read this pattern before attempting any other zoom-style slide. PLAN.md §3.4 has the gory details.
 
 ## Previously open issue — RESOLVED
 
@@ -143,15 +166,18 @@ If the user complains the line is still too short on any slide, jump to option 2
 
 ## Conversation history (compressed)
 
-1. User requested the app. I scaffolded Vite + R3F + GSAP + Tailwind with the original 3D camera flying through stars. First render had a giant cyan blob (arrow at wrong scale), a thin line clipping the corner, and "too AI" purple-cyan glass cards.
-2. User asked to: pivot to a 2D-feeling layout (camera looks straight down), make path white + thin arrow, make slides ~2/3 viewport, drop the AI-website aesthetic, use Free Uni yellow only where it makes sense, add a Free Uni-style wordmark. I did all of that — current state above.
-3. User reported the line only shows in a small corner. **(THIS IS THE CURRENT OPEN ITEM.)** Then asked me to write this handoff.
+1. **Scaffold**: Vite + R3F + GSAP + Tailwind. Original look was "too AI" (purple-cyan glass cards) — pivoted to editorial-thesis (deep nebula bg, Free Uni gold accent only, white thin line, no glass morphism, IBM Plex Sans Georgian + Fraunces).
+2. **Visual locking**: 2D-feeling camera (looks straight down), thin white arrow on white tube line, slides ~3/4 viewport, ShopItMark + FreeUniMark.
+3. **Path corner-clipping**: resolved by alternating linePoints across corners (TL→BR→TR→BR).
+4. **Sub-step navigation**: extended `SlideNavigationContext` with a `(slideIndex, step)` model and `useSlideSteps(n)` hook. Required bridging the nav context through the R3F Canvas and inside drei's Html portal.
+5. **Slides 0–4 built**: Title, Problem (3-step split), Demo (full-bleed video), Market Opportunity (TAM/SAM/SOM funnel), Foreign Benchmarks (iOS-icon-to-app zoom into mini company slides + comparison matrix). Several rebuilds of slide 4 along the way before the "one-world transform" pattern landed.
+6. **Plan handoff**: `PLAN.md` written so parallel AI sessions can pick up slides 5–16 individually.
 
 ## When you pick this up
 
-1. The corner-clipping line issue is resolved (see section above). If the user wants more — e.g., the line wandering even further across the viewport, or in-slide arrow progression — escalate to the two-point-per-slide model.
-2. Real ShopIt thesis content still needs porting in from `../ბეროშვილი_ლევან_MBA22_სამაგისტრო_ShopIt.pdf`. Only three sample slides exist.
-3. The static `.pptx` mirror of the deck has not been started.
-4. Always ask via `AskUserQuestion` before doing real work; the user wants clarifying questions for anything non-trivial.
-5. Run `tsc --noEmit` after any config/curve change (local `node_modules/.bin/tsc` works in this sandbox — confirmed).
-6. Don't make the line yellow. Don't bring back glass morphism. Don't reintroduce pills as visual chips.
+1. **Read `PLAN.md` first.** Pick one PENDING slide, claim it, ask Levan clarifying questions via `AskUserQuestion`, build it, verify, commit, mark DONE.
+2. Numbers / claims that aren't in the slide brief must come from the thesis PDF (`../ბეროშვილი_ლევან_MBA22_სამაგისტრო_ShopIt.pdf`) or be asked of Levan directly. Don't fabricate.
+3. The static `.pptx` mirror of the deck has not been started. Build it only after web is stable.
+4. Always ask via `AskUserQuestion` before doing real work — Levan expects clarifying questions for anything non-trivial.
+5. Run `npx tsc --noEmit` after any change (local `node_modules/.bin/tsc` works in this sandbox).
+6. Hard "no"s: no yellow line/arrow, no glass morphism, no rounded pill chips, no emojis, no second-person Georgian ("თქვენ"/"შენ").

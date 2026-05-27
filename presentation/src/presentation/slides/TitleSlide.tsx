@@ -1,6 +1,7 @@
 import { SlideCard } from "@/ui/SlideCard";
 import { SlideHeading } from "@/ui/SlideHeading";
 import { FreeUniMark } from "@/ui/FreeUniMark";
+import { ShopItMark } from "@/ui/ShopItMark";
 
 /**
  * Opening slide. Free Uni mark in the corner, a large serif "ShopIt" hero,
@@ -14,9 +15,12 @@ export function TitleSlide() {
         <FreeUniMark />
 
         <div className="flex flex-col gap-5">
-          <SlideHeading level={1} variant="serif">
-            ShopIt
-          </SlideHeading>
+          <div className="flex items-center gap-7">
+            <ShopItMark size={104} />
+            <SlideHeading level={1} variant="serif">
+              ShopIt
+            </SlideHeading>
+          </div>
           <p className="text-[30px] leading-snug text-white/80">
             ციფრული კომერციის პლატფორმა — ბიზნეს გეგმა
           </p>

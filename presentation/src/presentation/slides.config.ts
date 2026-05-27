@@ -83,15 +83,100 @@ export const slidesConfig: readonly SlideConfig[] = [
     transition: { durationSec: 2.6 },
   },
   {
-    id: "sellerFindings",
-    label: "კვლევის შედეგები · გამყიდველები",
+    id: "researchMethodology",
+    label: "კვლევის მეთოდოლოგია · გამყიდველები & კურიერები",
     position: [96, 2.5, 0],
     // Top-right — alternates back from localCompetitors' BR corner so the
     // chord between them sweeps diagonally across both viewports.
-    // (Narratively this is deck slide 7; deck slide 6 — Research
-    // Methodology — is still PENDING and will be inserted ahead of this
-    // entry when built.)
     linePoint: [101.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "sellerFindings",
+    label: "კვლევის შედეგები · გამყიდველები",
+    position: [112, -3.5, 0],
+    // Bottom-right — continues the diagonal alternation from
+    // researchMethodology's TR corner.
+    linePoint: [117.5, -6.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "solution",
+    label: "გადაწყვეტა · ShopIt-ის სამი ფენა",
+    position: [128, 2.5, 0],
+    // Top-right — alternates back from sellerFindings' BR corner so the
+    // chord between them sweeps diagonally across both viewports.
+    linePoint: [133.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "paymentsRoadmap",
+    label: "გადახდის ინფრასტრუქტურა · ფაზობრივი მოდელი",
+    position: [144, -3.5, 0],
+    // Bottom-right — continues the diagonal alternation from solution's
+    // TR corner.
+    linePoint: [149.5, -6.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "logistics",
+    label: "მიწოდება · კურიერების მარკეტპლეისი",
+    position: [160, 2.5, 0],
+    // Top-right — alternates back from paymentsRoadmap's BR corner.
+    linePoint: [165.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "pricing",
+    label: "ფასწარმოქმნა · ოთხი დონე, ერთი მონეტიზაცია",
+    position: [176, -3.5, 0],
+    // Bottom-right — continues the diagonal alternation from logistics'
+    // TR corner. Card centres at (176, -3.5); the line sweeps from the
+    // upper-left of this viewport down to the BR corner.
+    linePoint: [181.5, -6.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "growth",
+    label: "ზრდის ფაზები · MVP → Expansion → Scale",
+    position: [192, 2.5, 0],
+    // Top-right — alternates back from pricing's BR corner.
+    linePoint: [197.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "unitEconomics",
+    label: "ერთეულის ეკონომიკა · CAC · LTV · Break-even",
+    position: [208, -3.5, 0],
+    // Bottom-right — continues the diagonal alternation from growth's
+    // TR corner.
+    linePoint: [213.5, -6.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "marketing",
+    label: "მარკეტინგი · B2B + B2B2C",
+    position: [224, 2.5, 0],
+    // Top-right — alternates back from unitEconomics' BR corner.
+    linePoint: [229.5, 5.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "team",
+    label: "გუნდი · სამი თანადამფუძნებელი",
+    position: [240, -3.5, 0],
+    // Bottom-right — continues the diagonal alternation from marketing's
+    // TR corner.
+    linePoint: [245.5, -6.5, 0],
+    transition: { durationSec: 2.6 },
+  },
+  {
+    id: "conclusions",
+    label: "დასკვნა · მადლობა · კითხვები?",
+    position: [256, 2.5, 0],
+    // Top-right — alternates back from team's BR corner. Final slide of
+    // the deck — closes on the thank-you / Q&A screen.
+    linePoint: [261.5, 5.5, 0],
     transition: { durationSec: 2.6 },
   },
 ];

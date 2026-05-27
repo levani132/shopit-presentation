@@ -83,7 +83,7 @@ const FINDINGS: ReadonlyArray<Finding> = [
     sample: "N=10 · 6 რესპონდენტი",
     caption: "მენეჯერის დახმარება გაზრდის ჩართულობას",
     detail:
-      "Managed-ფარდელისთვის (499 ₾) ემპირიული საფუძველი — პერსონალური მხარდაჭერა, როგორც გადამწყვეტი ფაქტორი.",
+      "Managed პაკეტისთვის (499 ₾) ემპირიული საფუძველი — პერსონალური მხარდაჭერა, როგორც გადამწყვეტი ფაქტორი.",
   },
   {
     ordinal: "04",
@@ -106,7 +106,7 @@ export function SellerFindingsSlide() {
       <SlideHeading level={2}>რა გვითხრეს გამყიდველებმა</SlideHeading>
 
       <p className="mt-5 max-w-3xl text-[20px] leading-snug text-white/70">
-        12 გამყიდველის ნახევრადსტრუქტურირებული ინტერვიუ —{" "}
+        12 გამყიდველის პილოტური გამოკითხვა —{" "}
         <span className="text-white/45">
           ოთხი მიგნება, რომელმაც ShopIt-ის გადაწყვეტა ჩამოაყალიბა.
         </span>

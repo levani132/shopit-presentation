@@ -23,6 +23,14 @@ const SCRATCH_POSITION = new Vector3();
  * scene its 2D-canvas feel even though it's rendered with a 3D camera.
  *
  * Renders no geometry — purely a side-effecting controller.
+ *
+ * IMPORTANT: we use `getPoint(t)` here, NOT `getPointAt(t)`. CatmullRom
+ * curves are uniformly parameterized by `getPoint`, so at t = i/(n-1) the
+ * curve sits exactly on the i-th control point (i.e., slide i's
+ * position). `getPointAt` re-parameterizes by arc length, which only
+ * matches control points at the endpoints — every intermediate slide
+ * lands slightly off-centre, which on a laptop viewport reads as the
+ * slide card being visibly shifted from the centre of the screen.
  */
 export function CameraRig({
   slides,
@@ -39,7 +47,7 @@ export function CameraRig({
     const progress = progressRef.current.value;
     const t = n === 1 ? 0 : clamp(progress / (n - 1), 0, 1);
 
-    cameraCurve.getPointAt(t, SCRATCH_POSITION);
+    cameraCurve.getPoint(t, SCRATCH_POSITION);
 
     // Interpolate the z-offset between adjacent slides in case any slide
     // wants a custom altitude.

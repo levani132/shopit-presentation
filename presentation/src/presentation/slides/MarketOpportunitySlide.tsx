@@ -31,95 +31,93 @@ const tiers: ReadonlyArray<Tier> = [
   {
     code: "TAM",
     expansion: "Total Addressable Market",
-    georgian: "სრული პოტენციური ბაზარი",
+    georgian: "სრული მისამართებადი ბაზარი",
     value: "200,000+",
-    caption: "რეგისტრირებული ეკონომიკური სუბიექტი",
-    detail: "Geostat — ბიზნეს რეგისტრი",
+    caption: "რეგისტრირებული ეკონომიკური სუბიექტები",
+    detail: "საქსტატი — ბიზნეს რეგისტრი",
   },
   {
     code: "SAM",
     expansion: "Serviceable Addressable Market",
-    georgian: "ხელმისაწვდომი ბაზრის ნაწილი",
+    georgian: "ხელმისაწვდომი მისამართებადი ბაზარი",
     value: "~60,000",
-    caption: "საცალო / პროდუქტის გაყიდვის სეგმენტი",
-    detail: "≈30% TAM-დან",
+    caption: "საცალო ვაჭრობისა და პროდუქციის რეალიზაციის სეგმენტი",
+    detail: "TAM-ის ≈30%",
   },
   {
     code: "SOM",
     expansion: "Serviceable Obtainable Market",
-    georgian: "რეალურად დასაკავებელი წილი",
+    georgian: "რეალურად ათვისებადი ბაზრის წილი",
     value: "~600",
     caption: "აქტიური გამყიდველი ShopIt-ზე",
-    detail: "1% SAM-დან · გრძელვადიანი თარგეთი",
+    detail: "SAM-ის 1% · გრძელვადიანი მიზანი",
   },
 ];
 
 export function MarketOpportunitySlide() {
   return (
     <SlideCard eyebrow="ბაზრის შესაძლებლობა · 03" size="lg">
-      <SlideHeading level={2}>სად ვათავსებთ ShopIt-ს</SlideHeading>
+      <SlideHeading level={2}>სამიზნე ბაზრის შეფასება</SlideHeading>
 
-      <p className="mt-6 max-w-4xl text-[26px] leading-snug text-white/70">
-        Top-down ანალიზი ქართული ბაზრის სამიზნე სეგმენტისთვის.
-        <br />
-        <span className="text-white/50">
-          Bottom-up მიდგომას — როგორ მივდივართ ამ რიცხვამდე — პრეზენტაციის
-          მოგვიანებით ნაწილში დავუბრუნდებით.
+      <p className="mt-5 max-w-3xl text-[20px] leading-snug text-white/70">
+        ქართული ბაზრის სამიზნე სეგმენტის Top-down ანალიზი.{" "}
+        <span className="text-white/45">
+          Bottom-up მიდგომას პრეზენტაციის მომდევნო ნაწილში განვიხილავთ.
         </span>
       </p>
 
-      <div className="mt-14 grid grid-cols-[1.15fr_1fr] gap-16">
+      <div className="mt-10 grid grid-cols-[1.1fr_1fr] gap-12">
         {/* Left column: the funnel itself. */}
         <div className="relative">
           {/* Connecting rail through the three nodes. */}
           <span
             aria-hidden
-            className="absolute left-3 top-6 h-[calc(100%-3rem)] w-[2px] origin-top animate-scale-y-in bg-nebula-gold/35"
+            className="absolute left-[7px] top-5 h-[calc(100%-2.5rem)] w-[2px] origin-top animate-scale-y-in bg-nebula-gold/35"
             style={{ animationDelay: "650ms" }}
           />
 
-          <ul className="flex flex-col gap-12">
+          <ul className="flex flex-col gap-7">
             {tiers.map((tier, idx) => (
               <li
                 key={tier.code}
-                className="relative flex items-start gap-8 opacity-0 animate-fade-in-up"
+                className="relative flex items-start gap-6 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: `${260 + idx * 220}ms` }}
               >
                 {/* Node on the rail. */}
                 <span
                   aria-hidden
-                  className={`relative z-10 mt-3 block h-4 w-4 shrink-0 rounded-full ${
+                  className={`relative z-10 mt-[10px] block h-4 w-4 shrink-0 rounded-full ${
                     tier.code === "SOM"
-                      ? "bg-nebula-gold ring-[6px] ring-nebula-gold/20"
+                      ? "bg-nebula-gold ring-[5px] ring-nebula-gold/20"
                       : "bg-nebula-gold/55"
                   }`}
                 />
 
                 <div className="flex-1">
-                  <div className="flex items-baseline gap-4">
-                    <p className="font-mono text-[20px] uppercase tracking-eyebrow text-nebula-gold">
+                  <div className="flex items-baseline gap-3">
+                    <p className="font-mono text-[18px] uppercase tracking-eyebrow text-nebula-gold">
                       {tier.code}
                     </p>
-                    <p className="text-[15px] text-white/40">
+                    <p className="text-[14px] text-white/40">
                       {tier.expansion}
                     </p>
                   </div>
-                  <p className="mt-1 text-[15px] italic text-white/55">
+                  <p className="text-[13px] italic text-white/50">
                     {tier.georgian}
                   </p>
                   <p
-                    className={`mt-3 ${
+                    className={`mt-2 ${
                       tier.code === "SOM"
-                        ? "text-[48px] font-semibold text-white"
-                        : "text-[38px] font-medium text-white/90"
+                        ? "text-[36px] font-semibold text-white"
+                        : "text-[30px] font-medium text-white/90"
                     } leading-none`}
                   >
                     {tier.value}
                   </p>
-                  <p className="mt-3 text-[22px] leading-snug text-white/80">
+                  <p className="mt-2 text-[18px] leading-snug text-white/80">
                     {tier.caption}
                   </p>
-                  <p className="mt-1 text-[18px] text-white/45">
+                  <p className="mt-1 text-[14px] text-white/45">
                     {tier.detail}
                   </p>
                 </div>
@@ -130,34 +128,34 @@ export function MarketOpportunitySlide() {
 
         {/* Right column: the focal number. */}
         <div
-          className="flex flex-col justify-center border-l border-nebula-rule pl-14 opacity-0 animate-fade-in-up"
+          className="flex flex-col justify-center border-l border-nebula-rule pl-10 opacity-0 animate-fade-in-up"
           style={{ animationDelay: "1150ms" }}
         >
-          <p className="font-mono text-[16px] uppercase tracking-eyebrow text-nebula-gold">
-            გრძელვადიანი თარგეთი
+          <p className="font-mono text-[14px] uppercase tracking-eyebrow text-nebula-gold">
+            გრძელვადიანი მიზანი
           </p>
-          <p className="mt-4 font-serif text-[220px] font-semibold leading-[0.9] tracking-tight text-white">
+          <p className="mt-3 font-serif text-[160px] font-semibold leading-[0.9] tracking-tight text-white">
             600
           </p>
-          <p className="mt-4 text-[28px] font-medium leading-snug text-white">
+          <p className="mt-3 text-[22px] font-medium leading-snug text-white">
             აქტიური გამყიდველი
           </p>
-          <p className="mt-3 text-[20px] leading-relaxed text-white/60">
-            ~₾156,000 თვიური GMV ShopIt-ის წილში
+          <p className="mt-2 text-[16px] leading-relaxed text-white/60">
+            ~₾156,000 პლატფორმის თვიური შემოსავალი
             <br />
-            <span className="text-white/40">
+            <span className="text-white/45">
               (260 ₾ შეწონილი ARPU × 600 გამყიდველი)
             </span>
           </p>
 
-          <div className="mt-8 flex items-start gap-4 border-t border-nebula-rule pt-6">
+          <div className="mt-6 flex items-start gap-3 border-t border-nebula-rule pt-4">
             <span
               aria-hidden
-              className="mt-[10px] block h-[2px] w-7 shrink-0 bg-nebula-gold"
+              className="mt-[7px] block h-[2px] w-6 shrink-0 bg-nebula-gold"
             />
-            <p className="text-[18px] leading-relaxed text-white/55">
-              1%-იანი წილი მცირე საცალო სეგმენტში — საკმარისად კონსერვატიული,
-              რომ მიღწევადი იყოს, საკმარისად მაღალი მდგრადი ბიზნესისთვის.
+            <p className="text-[14px] leading-relaxed text-white/55">
+              1%-იანი წილი საცალო სეგმენტში — საკმარისად კონსერვატიული ნიშნულია მისაღწევად,
+              თუმცა საკმარისად მაღალია ბიზნესის მდგრადობის უზრუნველსაყოფად.
             </p>
           </div>
         </div>

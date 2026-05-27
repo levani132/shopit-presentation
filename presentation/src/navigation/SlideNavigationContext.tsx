@@ -54,7 +54,17 @@ interface SlideNavigation {
   currentStepCount: number;
 }
 
-const SlideNavigationContext = createContext<SlideNavigation | null>(null);
+/**
+ * Exported so callers can BRIDGE this context across the React Three Fiber
+ * Canvas boundary. R3F's Canvas mounts its children with a separate
+ * reconciler, which means React contexts from the outer tree are invisible
+ * to anything rendered inside (including drei's `<Html>` portals). The fix
+ * is to read this context's value outside the Canvas and re-provide it via
+ * `<SlideNavigationContext.Provider>` around the Canvas children. See
+ * Presentation.tsx for the bridge in practice.
+ */
+export const SlideNavigationContext =
+  createContext<SlideNavigation | null>(null);
 
 /**
  * Per-slide context providing the slide's own index to its body component.

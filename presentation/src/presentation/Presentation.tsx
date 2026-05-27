@@ -5,6 +5,7 @@ import { PathArrow } from "@/scene/PathArrow";
 import { CameraRig } from "@/scene/CameraRig";
 import { SlideStage } from "@/scene/SlideStage";
 import {
+  SlideNavigationContext,
   SlideNavigationProvider,
   useSlideNavigation,
 } from "@/navigation/SlideNavigationContext";
@@ -44,44 +45,54 @@ interface PresentationViewProps {
  * and the on-screen overlay.
  */
 function PresentationView({ curves }: PresentationViewProps) {
-  const { slides, currentIndex, setTransitioning } = useSlideNavigation();
+  // Grab the FULL navigation value (not just destructured fields) so we can
+  // re-provide it inside the Canvas via the context bridge below.
+  const navigation = useSlideNavigation();
+  const { slides, currentIndex, setTransitioning } = navigation;
   const progressRef = useCameraJourney(slides, currentIndex, setTransitioning);
   useKeyboardShortcuts();
 
   return (
     <>
       <SpaceScene>
-        <JourneyPath curve={curves.lineCurve} />
-        <PathArrow
-          curve={curves.lineCurve}
-          progressRef={progressRef}
-          totalSlides={slides.length}
-        />
-        <CameraRig
-          slides={slides}
-          cameraCurve={curves.cameraCurve}
-          progressRef={progressRef}
-        />
-        {slides.map((slide, idx) => {
-          const SlideBody = getSlideComponent(slide.id);
-          if (!SlideBody) {
-            if (import.meta.env.DEV) {
-              console.warn(
-                `[Presentation] Slide id "${slide.id}" has no component in the registry.`,
-              );
+        {/* R3F Canvas runs a separate React reconciler, so context providers
+            from outside the Canvas are not visible to components rendered
+            inside (even via drei's <Html> portal). We re-provide the same
+            navigation value here so useSlideSteps inside slide bodies can
+            read it. */}
+        <SlideNavigationContext.Provider value={navigation}>
+          <JourneyPath curve={curves.lineCurve} />
+          <PathArrow
+            curve={curves.lineCurve}
+            progressRef={progressRef}
+            totalSlides={slides.length}
+          />
+          <CameraRig
+            slides={slides}
+            cameraCurve={curves.cameraCurve}
+            progressRef={progressRef}
+          />
+          {slides.map((slide, idx) => {
+            const SlideBody = getSlideComponent(slide.id);
+            if (!SlideBody) {
+              if (import.meta.env.DEV) {
+                console.warn(
+                  `[Presentation] Slide id "${slide.id}" has no component in the registry.`,
+                );
+              }
+              return null;
             }
-            return null;
-          }
-          return (
-            <SlideStage
-              key={slide.id}
-              slide={slide}
-              slideIndex={idx}
-              progressRef={progressRef}
-              component={SlideBody}
-            />
-          );
-        })}
+            return (
+              <SlideStage
+                key={slide.id}
+                slide={slide}
+                slideIndex={idx}
+                progressRef={progressRef}
+                component={SlideBody}
+              />
+            );
+          })}
+        </SlideNavigationContext.Provider>
       </SpaceScene>
       <NavigationOverlay />
     </>

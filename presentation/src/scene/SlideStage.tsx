@@ -3,7 +3,11 @@ import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import type { ResolvedSlide } from "@/presentation/types";
 import { clamp } from "@/lib/math";
-import { SlideSelfProvider } from "@/navigation/SlideNavigationContext";
+import {
+  SlideNavigationContext,
+  SlideSelfProvider,
+  useSlideNavigation,
+} from "@/navigation/SlideNavigationContext";
 
 interface SlideStageProps {
   slide: ResolvedSlide;
@@ -36,6 +40,11 @@ export function SlideStage({
 }: SlideStageProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  // SlideStage is rendered inside the Canvas, so it can see the
+  // canvas-level navigation bridge (provided in Presentation.tsx). We read
+  // the value here and pass it through the Html portal below.
+  const navigation = useSlideNavigation();
+
   useFrame(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
@@ -51,11 +60,20 @@ export function SlideStage({
 
   return (
     <Html position={slide.position} center style={{ pointerEvents: "none" }}>
-      <div ref={wrapperRef} style={{ transition: "opacity 80ms linear" }}>
-        <SlideSelfProvider slideIndex={slideIndex}>
-          <SlideBody />
-        </SlideSelfProvider>
-      </div>
+      {/*
+        drei's <Html> mounts its children with `ReactDOM.createRoot()` — a
+        BRAND NEW React root that has no connection to any outer context,
+        not even the bridge we already added inside the Canvas. So we
+        re-provide the navigation context one more time here, at the very
+        top of the Html portal's React tree, before the slide body reads it.
+      */}
+      <SlideNavigationContext.Provider value={navigation}>
+        <div ref={wrapperRef} style={{ transition: "opacity 80ms linear" }}>
+          <SlideSelfProvider slideIndex={slideIndex}>
+            <SlideBody />
+          </SlideSelfProvider>
+        </div>
+      </SlideNavigationContext.Provider>
     </Html>
   );
 }
