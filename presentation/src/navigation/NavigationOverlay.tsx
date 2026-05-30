@@ -77,6 +77,10 @@ export function NavigationOverlay() {
             from the slide-stepping controls. */}
         <span aria-hidden className="h-4 w-px bg-white/15" />
 
+        <NavButton label="Open speaker notes" onClick={openNotesWindow}>
+          <NotesIcon />
+        </NavButton>
+
         <NavButton
           label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
           onClick={toggleFullscreen}
@@ -85,6 +89,41 @@ export function NavigationOverlay() {
         </NavButton>
       </div>
     </div>
+  );
+}
+
+/**
+ * Opens the speaker-notes window in a second browser window. The user then
+ * drags the audience-facing presentation to the projector and keeps this
+ * window on the laptop. Same-origin so BroadcastChannel sync just works.
+ */
+function openNotesWindow() {
+  const url = new URL(window.location.href);
+  url.searchParams.set("mode", "notes");
+  // Reasonable starting size for a laptop screen — user can resize freely.
+  window.open(
+    url.toString(),
+    "shopit-presenter-notes",
+    "width=1200,height=800,noopener=false",
+  );
+}
+
+/** Thin lined "document with lines" glyph for the notes affordance. */
+function NotesIcon() {
+  return (
+    <svg
+      viewBox="0 0 14 14"
+      width="13"
+      height="13"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="M3 1.5h6.5L11.5 3.5V12a0.5 0.5 0 0 1-0.5 0.5H3a0.5 0.5 0 0 1-0.5-0.5V2A0.5 0.5 0 0 1 3 1.5z" />
+      <path d="M5 5h4 M5 7.5h4 M5 10h2.5" />
+    </svg>
   );
 }
 

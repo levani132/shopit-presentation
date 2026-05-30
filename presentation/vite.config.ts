@@ -12,5 +12,10 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true,
+    // Allow Vite to serve files from the parent folder so the presenter
+    // notes view can `import speech?raw` from ../ShopIt-Speech-v2.md.
+    fs: {
+      allow: [".."],
+    },
   },
 });

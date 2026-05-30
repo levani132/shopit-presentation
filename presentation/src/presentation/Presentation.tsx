@@ -13,6 +13,8 @@ import { useKeyboardShortcuts } from "@/navigation/useKeyboardShortcuts";
 import { NavigationOverlay } from "@/navigation/NavigationOverlay";
 import { useCameraJourney } from "@/camera/useCameraJourney";
 import { buildJourneyCurves, type JourneyCurves } from "@/camera/buildJourneyCurve";
+import { useFullscreen } from "@/lib/useFullscreen";
+import { useMainBroadcast } from "@/presenter/useMainBroadcast";
 import { resolveSlides } from "./resolveSlides";
 import { slidesConfig } from "./slides.config";
 import { getSlideComponent } from "./slides";
@@ -51,6 +53,13 @@ function PresentationView({ curves }: PresentationViewProps) {
   const { slides, currentIndex, setTransitioning } = navigation;
   const progressRef = useCameraJourney(slides, currentIndex, setTransitioning);
   useKeyboardShortcuts();
+
+  // Mirror navigation state + fullscreen state to the presenter (notes)
+  // window via BroadcastChannel. Also receives nav commands from the
+  // presenter window's keyboard. Inert (channel-not-supported) on older
+  // browsers — the main window still works standalone.
+  const { isFullscreen } = useFullscreen();
+  useMainBroadcast({ isFullscreen });
 
   return (
     <>
