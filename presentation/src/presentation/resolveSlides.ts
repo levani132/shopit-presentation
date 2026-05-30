@@ -18,8 +18,16 @@ export function resolveSlides(configs: readonly SlideConfig[]): ResolvedSlide[] 
     const lookAt = cfg.lookAt ?? cfg.position;
     const linePoint = cfg.linePoint ?? cfg.position;
     const cameraStop = addVec3(cfg.position, cameraOffset);
+    // Screenshot mode: when the page is opened with ?fast in the query
+    // string, collapse all camera transitions to ~50ms. This is only used
+    // by the Playwright capture script.
+    const fastMode =
+      typeof window !== "undefined" &&
+      window.location?.search?.includes("fast");
     const transition = {
-      durationSec: cfg.transition?.durationSec ?? DEFAULT_TRANSITION.durationSec,
+      durationSec: fastMode
+        ? 0.05
+        : cfg.transition?.durationSec ?? DEFAULT_TRANSITION.durationSec,
       ease: cfg.transition?.ease ?? DEFAULT_TRANSITION.ease,
     };
 

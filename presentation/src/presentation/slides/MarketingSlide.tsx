@@ -103,27 +103,27 @@ interface KpiRow {
 const KPIS: ReadonlyArray<KpiRow> = [
   {
     phase: "MVP",
-    timing: "1–6 თვე",
+    timing: "0–3 თვე",
     targets: [
-      "30 აქტიური გამყიდველი",
+      "10+ აქტიური გამყიდველი",
       "CAC < 250 ₾",
       "Activation > 70%",
     ],
   },
   {
-    phase: "Growth",
-    timing: "7–12 თვე",
+    phase: "Expansion",
+    timing: "3–9 თვე",
     targets: [
-      "100+ აქტიური გამყიდველი",
+      "50+ აქტიური გამყიდველი",
       "MRR ზრდა 30% MoM",
       "ფასიანი > 25%",
     ],
   },
   {
     phase: "Scale",
-    timing: "13–24 თვე",
+    timing: "9–18 თვე",
     targets: [
-      "500+ აქტიური გამყიდველი",
+      "200+ აქტიური გამყიდველი",
       "LTV : CAC > 5 : 1",
       "Referral > 15%",
     ],
