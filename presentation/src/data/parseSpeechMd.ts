@@ -1,4 +1,4 @@
-import speechRaw from "../../../ShopIt-Speech-v2.md?raw";
+import speechRaw from "./ShopIt-Speech-v2.md?raw";
 
 /**
  * Speaker notes for one slide, as parsed from ShopIt-Speech-v2.md.
